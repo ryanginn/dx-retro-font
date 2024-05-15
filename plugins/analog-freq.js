@@ -1,7 +1,7 @@
 // Plugin configuration, this is used in the administration when plugins are loaded
 var pluginConfig = {
     name: 'Analogue Frequency Display',
-    version: '1.0.2',
+    version: '1.0.3',
     author: 'Ryan G (Code improved by Noobish)',
     frontEndPath: 'analog-freq/frontend.js'
 }
