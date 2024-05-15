@@ -1,4 +1,3 @@
-
 function loadFont(url) {
     var font = new FontFace('Retro-font', 'url(' + url + ')');
     font.load().then(function(loadedFont) {
@@ -8,11 +7,25 @@ function loadFont(url) {
         console.error('Font loading failed: ' + error);
     });
 }
-function applyFontToElements(fontName) {
-    var elements = document.getElementsByClassName('text-big');
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].style.fontFamily = fontName + ', Arial, sans-serif';
-        elements[i].style.padding = '10px';
+
+if(settings.frequencyFontEnabled === true) {
+
+    function applyFontToElements(fontName) {
+        $('.text-big').css({
+            'font-family': fontName + ', Arial, sans-serif',
+            'padding': '10px'
+        });
+    }
+
+}
+
+else {
+    function applyFontToElements(fontName) {
+        $('#data-frequency').css({
+            'font-family': fontName + ', Arial, sans-serif',
+            'padding': '10px'
+        });
     }
 }
+
 loadFont('font.ttf');
