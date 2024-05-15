@@ -1,5 +1,5 @@
 # dx-retro-font
-Retro font plugin for Noobish's FM-DX Webserver
+Retro font plugin for Noobish's [FM-DX Webserver](https://github.com/NoobishSVK/fm-dx-webserver)
 
 ![Screenshot of the plugin in use](https://i.ibb.co/2hJFx02/image.png)
 
