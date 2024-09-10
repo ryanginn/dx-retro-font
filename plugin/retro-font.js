@@ -1,9 +1,9 @@
 // Plugin configuration, this is used in the administration when plugins are loaded
 var pluginConfig = {
-    name: 'Analogue Frequency Display',
-    version: '1.0.4',
-    author: 'Ryan G (improved by Noobish)',
-    frontEndPath: 'analog-freq/frontend.js'
+    name: 'Retro Font Display',
+    version: '1.0.5',
+    author: 'Ryan G (improved by Noobish, forked by Bkram)',
+    frontEndPath: 'retro-font/retro-font.js'
 }
 
 var pluginSettings = {
