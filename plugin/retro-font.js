@@ -1,6 +1,6 @@
 // Plugin configuration, this is used in the administration when plugins are loaded
 var pluginConfig = {
-    name: 'Retro Font Display',
+    name: 'Retro Font',
     version: '1.0.5',
     author: 'Ryan G, Noobish and Bkram)',
     frontEndPath: 'retro-font/retro-font.js'
