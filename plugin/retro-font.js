@@ -2,7 +2,7 @@
 var pluginConfig = {
     name: 'Retro Font Display',
     version: '1.0.5',
-    author: 'Ryan G (improved by Noobish, forked by Bkram)',
+    author: 'Ryan G, Noobish and Bkram)',
     frontEndPath: 'retro-font/retro-font.js'
 }
 
