@@ -8,7 +8,7 @@ var pluginConfig = {
 
 var pluginSettings = {
     frequencyFontEnabled: true,  // Set this to false to only change the frequency, instead of all text.
-    } 
+}
 
 // Backend (server) changes can go here...
 

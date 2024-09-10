@@ -4,7 +4,7 @@ var settings = {
 
 function applyFontToElements(fontName) {
     console.log('Applying font to elements with font name:', fontName);
-    
+
     $('.text-big').css({
         'font-family': fontName + ', Arial, sans-serif',
         'padding': '10px'
@@ -26,10 +26,10 @@ function applyFontToElements(fontName) {
 
 function loadFont(url) {
     var font = new FontFace('Retro-font', 'url(' + url + ')');
-    font.load().then(function(loadedFont) {
+    font.load().then(function (loadedFont) {
         document.fonts.add(loadedFont);
         applyFontToElements('Retro-font');
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.error('Font loading failed: ' + error);
     });
 }
