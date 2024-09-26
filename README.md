@@ -11,3 +11,11 @@ Copy retro-font.js and retro-font folder to the plugins directory of your FM-DX-
 Navigate to the plugins menu in the admin panel, and enable the plugin.
 
 You can modify retro-font.js to specify if you only want the font of the frequency to change. This is optional.
+
+# New fonts
+
+There are now 3 different font options pre-installed:
+
+ - font.ttf - The default 7 segment display 
+ - font-bkram.ttf - The font used on Bkram's Haaglanden webserver
+ - font-minisystem.otf - Font suggested by LaceK_85
