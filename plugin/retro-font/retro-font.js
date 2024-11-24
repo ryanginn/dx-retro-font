@@ -1,3 +1,30 @@
+var settings = {
+    frequencyFontEnabled: true,
+};
+
+// Set <ul> height inside #af-list to 363px
+$('#af-list ul').css('height', '363px');
+
+function applyFontToElements(fontName) {
+    console.log('Applying font to elements with font name:', fontName);
+
+    $('.text-big').css({
+        'font-family': fontName + ', Arial, sans-serif',
+        'padding': '15px',
+        'display': 'flex',
+        'align-items': 'center',
+        'justify-content': 'center',
+        'text-align': 'center',
+        // 'color': 'green',
+        'font-size': '48px',
+    });
+
+    $('.text-medium-big').css({
+        'font-family': fontName + ', Arial, sans-serif',
+        'padding': '15px',
+        'display': 'flex',
+        'align-items': 'center',
+        'justify-content': 'center',
         'text-align': 'center',
         // 'color': 'green',
         'font-size': '32px',
