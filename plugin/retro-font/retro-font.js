@@ -2,9 +2,7 @@ var settings = {
     frequencyFontEnabled: true,
 };
 
-// Set <ul> height inside #af-list to 363px
-$('#af-list ul').css('height', '363px');
-
+// Ensuring we do not modify #af-list or its children
 function applyFontToElements(fontName) {
     console.log('Applying font to elements with font name:', fontName);
 
@@ -15,7 +13,6 @@ function applyFontToElements(fontName) {
         'align-items': 'center',
         'justify-content': 'center',
         'text-align': 'center',
-        // 'color': 'green',
         'font-size': '48px',
     });
 
@@ -26,9 +23,9 @@ function applyFontToElements(fontName) {
         'align-items': 'center',
         'justify-content': 'center',
         'text-align': 'center',
-        // 'color': 'green',
         'font-size': '32px',
     });
+
     $('#data-frequency').css({
         'font-family': (settings.frequencyFontEnabled ? 'font.ttf' : fontName + ', Arial, sans-serif'),
         'padding': '15px',
@@ -36,7 +33,6 @@ function applyFontToElements(fontName) {
         'align-items': 'center',
         'justify-content': 'center',
         'text-align': 'center',
-        // 'color': 'green',
     });
 
     $('#data-ps').css({
