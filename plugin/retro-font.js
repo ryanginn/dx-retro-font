@@ -1,7 +1,7 @@
 // Plugin configuration, this is used in the administration when plugins are loaded
 var pluginConfig = {
     name: 'Retro Font',
-    version: '2.0.0',
+    version: '2.0.1',
     author: 'Ryan G, ODX, Noobish and Bkram',
     frontEndPath: 'retro-font/retro-font.js'
 }

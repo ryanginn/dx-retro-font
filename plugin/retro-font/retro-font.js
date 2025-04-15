@@ -1,6 +1,6 @@
 var settings = {
     frequencyFontEnabled: true,
-    psFontEnabled: false // toggle for #data-ps
+    psFontEnabled: false
 };
 
 const FONTS = {
@@ -21,25 +21,45 @@ function applyFontToElements(fontName) {
     const titilliumOnly = `'Titillium Web', sans-serif`;
     const defaultFont = `'Roboto Mono', monospace`;
 
-    $('.text-big').css({
-        'font-family': usingDefaultFont ? titilliumOnly : customFontFamily,
-        'font-size': '48px',
-        'padding': '15px',
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
-        'text-align': 'center'
-    });
+    if (usingDefaultFont) {
+        $('.text-big, .text-medium-big').css({
+            'font-family': titilliumOnly,
+            'font-size': '',
+            'padding': '',
+            'margin': '',
+            'letter-spacing': '',
+            'line-height': '',
+            'box-sizing': ''
+        });
+    } else {
+        $('.text-big').css({
+            'font-family': customFontFamily,
+            'font-size': '48px',
+            'padding': '15px',
+            'margin': 0,
+            'display': 'flex',
+            'align-items': 'center',
+            'justify-content': 'center',
+            'text-align': 'center',
+            'line-height': '1.2',
+            'letter-spacing': 'normal',
+            'box-sizing': 'border-box'
+        });
 
-    $('.text-medium-big').css({
-        'font-family': usingDefaultFont ? titilliumOnly : customFontFamily,
-        'font-size': '32px',
-        'padding': '15px',
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
-        'text-align': 'center'
-    });
+        $('.text-medium-big').css({
+            'font-family': customFontFamily,
+            'font-size': '32px',
+            'padding': '15px',
+            'margin': 0,
+            'display': 'flex',
+            'align-items': 'center',
+            'justify-content': 'center',
+            'text-align': 'center',
+            'line-height': '1.3',
+            'letter-spacing': 'normal',
+            'box-sizing': 'border-box'
+        });
+    }
 
     $('#data-frequency').css({
         'font-family': usingDefaultFont ? titilliumOnly : customFontFamily
