@@ -35,7 +35,7 @@ function applyFontToElements(fontName) {
         $('.text-big').css({
             'font-family': customFontFamily,
             'font-size': '48px',
-            'padding': '15px',
+            'padding': '10px',
             'margin': 0,
             'display': 'flex',
             'align-items': 'center',
@@ -49,7 +49,7 @@ function applyFontToElements(fontName) {
         $('.text-medium-big').css({
             'font-family': customFontFamily,
             'font-size': '32px',
-            'padding': '15px',
+            'padding': '10px',
             'margin': 0,
             'display': 'flex',
             'align-items': 'center',
