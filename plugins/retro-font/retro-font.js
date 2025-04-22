@@ -7,6 +7,7 @@ const FONTS = {
     "Default": "",
     "Retro": "retrofont/font.ttf",
     "OpenDyslexic": "retrofont/opendyslexic.ttf",
+    "Sony XDR": "retrofont/sonyxdr.ttf",
     "VFD": "retrofont/font12.ttf",
     "Dots": "retrofont/font3.ttf",
     "Pixelyourlife": "retrofont/pixelyourlife.ttf",
