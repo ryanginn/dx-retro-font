@@ -6,6 +6,7 @@ var settings = {
 const FONTS = {
     "Default": "",
     "Retro": "retrofont/font.ttf",
+    "OpenDyslexic": "retrofont/opendyslexic.ttf",
     "VFD": "retrofont/font12.ttf",
     "Dots": "retrofont/font3.ttf",
     "Pixelyourlife": "retrofont/pixelyourlife.ttf",
@@ -87,11 +88,10 @@ function loadFont(url) {
 }
 
 function createFontDropdown() {
-    $("#font-selection-container").remove();
-    const panelFull = $('.panel-full.flex-center.no-bg.m-0').first();
+    const imperialUnitsDiv = $("#imperial-units").closest('.form-group'); // Find the "Imperial units" div.
 
-    if (panelFull.length) {
-        panelFull.after(`
+    if (imperialUnitsDiv.length) {
+        imperialUnitsDiv.after(`
             <div id="font-selection-container" class="form-group">
                 <label for="font-selection" class="form-label">
                     <i class="fa-solid m-right-10"></i>Select Retro-Font
@@ -127,25 +127,29 @@ function createFontDropdown() {
 }
 
 function addPsFontCheckbox() {
-    const checkboxes = document.querySelectorAll('.modal-panel-content .form-group.checkbox');
-    if (checkboxes.length > 0) {
+    const imperialUnitsDiv = $("#imperial-units").closest('.form-group');
+
+    if (imperialUnitsDiv.length) {
+        const id = "toggle-ps-font";
+        const label = "Use Font on PS Text";
+
         const psToggleDiv = document.createElement('div');
-        psToggleDiv.className = 'form-group checkbox';
+        psToggleDiv.className = 'form-group';
         psToggleDiv.innerHTML = `
-            <input type="checkbox" tabindex="0" id="toggle-ps-font" aria-label="Enable custom font on PS text">
-            <label for="toggle-ps-font" class="tooltip" data-tooltip="Enable if you want the selected font to apply to PS text.">
-                <i class="fa-solid fa-toggle-off m-right-10"></i> Use Font on PS Text
-            </label>
+            <div class="switch flex-container flex-phone flex-phone-column flex-phone-center">
+                <input type="checkbox" tabindex="0" id="${id}" aria-label="${label}" />
+                <label for="${id}"></label>
+                <span class="text-smaller text-uppercase text-bold color-4 p-10">${label.toUpperCase()}</span>
+            </div>
         `;
 
-        const lastCheckbox = checkboxes[checkboxes.length - 1];
-        lastCheckbox.insertAdjacentElement('afterend', psToggleDiv);
+        imperialUnitsDiv.after(psToggleDiv);
 
         const saved = localStorage.getItem("USE_PS_FONT") === "true";
-        document.getElementById('toggle-ps-font').checked = saved;
+        document.getElementById(id).checked = saved;
         settings.psFontEnabled = saved;
 
-        document.getElementById('toggle-ps-font').addEventListener('change', function () {
+        document.getElementById(id).addEventListener('change', function () {
             settings.psFontEnabled = this.checked;
             localStorage.setItem("USE_PS_FONT", this.checked);
 
