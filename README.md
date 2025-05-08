@@ -22,7 +22,7 @@ There are now 9 different extra font options included:
  - OpenDyslexic
  - Sony XDR - Font suggested by LaceK_85
  - VFD
- - XHDATA
+ - XHDATA - suggested by István
  - Dots
  - Pixelyourlife
  - RumAndBones
