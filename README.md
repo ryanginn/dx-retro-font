@@ -2,7 +2,7 @@
 
 Retro font plugin for Noobish's [FM-DX Webserver](https://github.com/NoobishSVK/fm-dx-webserver)
 
-![Screenshot of the plugin in use](https://i.ibb.co/2hJFx02/image.png)
+![image](https://github.com/user-attachments/assets/027206e7-0565-42d1-a2af-57c0d6c7cb02)
 
 ## Installation
 
