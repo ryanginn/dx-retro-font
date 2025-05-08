@@ -79,7 +79,7 @@ function loadFont(url) {
         return;
     }
 
-    let fullUrl = window.location.origin + '/' + url;
+    let fullUrl = window.location.origin + window.location.pathname + '/' + url;
     const font = new FontFace("Retro-font", `url(${fullUrl})`);
     font.load().then(function (loadedFont) {
         document.fonts.add(loadedFont);
