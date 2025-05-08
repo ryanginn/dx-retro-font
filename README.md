@@ -3,6 +3,7 @@
 Retro font plugin for Noobish's [FM-DX Webserver](https://github.com/NoobishSVK/fm-dx-webserver)
 
 ![image](https://github.com/user-attachments/assets/027206e7-0565-42d1-a2af-57c0d6c7cb02)
+![image](https://github.com/user-attachments/assets/d5e3f684-b1e8-475c-be69-f8f806f835eb)
 
 ## Installation
 
@@ -12,9 +13,6 @@ Retro font plugin for Noobish's [FM-DX Webserver](https://github.com/NoobishSVK/
 Navigate to the plugins menu in the admin panel, and enable the plugin.
 
 You can modify the font and select if you want the PS text to use the font in the settings menu.
-
-![image](https://github.com/user-attachments/assets/d5e3f684-b1e8-475c-be69-f8f806f835eb)
-
 
 # New fonts
 
