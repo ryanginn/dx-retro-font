@@ -13,6 +13,9 @@ Navigate to the plugins menu in the admin panel, and enable the plugin.
 
 You can modify the font and select if you want the PS text to use the font in the settings menu.
 
+![image](https://github.com/user-attachments/assets/d5e3f684-b1e8-475c-be69-f8f806f835eb)
+
+
 # New fonts
 
 There are now 9 different extra font options included:
