@@ -1,38 +1,105 @@
 # dx-retro-font
 
+> **Version:** 10ú Samhain 2025
+> **Author:** Rhían Mac G
+
 Retro font plugin for Noobish's [FM-DX Webserver](https://github.com/NoobishSVK/fm-dx-webserver)
 
 ![image](https://github.com/user-attachments/assets/027206e7-0565-42d1-a2af-57c0d6c7cb02)
 ![image](https://github.com/user-attachments/assets/d5e3f684-b1e8-475c-be69-f8f806f835eb)
 
+## Overview
+
+This script allows users to customize the font and colours for PS and various other parts of the FM-DX-Webserver
+
+## Features
+
+  * \*\* Dynamic Font Loading:\*\* Loads external font files (`.ttf`) on demand without requiring pre-defined CSS `@font-face` rules for every option.
+  * **Per-Font Scaling:** Supports a unique `scale` factor for each font configuration to normalize varying font base sizes (e.g., making a tiny pixel font larger to match standard fonts).
+  * **Toggling:**
+      * Independent coluor selection for PS text, useful if you are trying to make it look like an old car radio 😉
+      * Toggle switch to optionally apply the retro font to PS text or keep it standard.
+  * **Persistence:** Automatically saves user selections (font, color, toggles) to browser `localStorage`.
+  * **Smart Defaults:** Configurable "server defaults" for initial visitors.
+
 ## Installation
 
  - Copy all the contents of the plugins folder to the plugins directory of your FM-DX-webserver installation.
  - Copy the retrofont folder and its contents to the web directory of your webserver, not the plugins directory!
+ - Enable in Webserver settings
+ - Job done!
 
-Navigate to the plugins menu in the admin panel, and enable the plugin.
+## Configuration
 
-You can modify the font and select if you want the PS text to use the font in the settings menu.
+All major configurations are handled at the top of the script script.
 
-# New fonts
+### 1\. Server Defaults
 
-There are now 9 different extra font options included:
+Control the initial state for new users who have not yet configured their preferences.
 
-**Retro - The default 7 segment display**
-![image](https://github.com/user-attachments/assets/1bd8ef96-d00f-4e7a-a4b5-c841dcca9fb4)
-**OpenDyslexic**
-![image](https://github.com/user-attachments/assets/3b933565-7dfe-4cb9-a0ae-58fb20784252)
-**Sony XDR - Font suggested by LaceK_85**
-![image](https://github.com/user-attachments/assets/dbaa7f04-1d45-4fb3-aa64-9fb84cef3f7c)
-**VFD**
-![image](https://github.com/user-attachments/assets/d6c3cdae-68d5-4514-a1ab-8097ea58549a)
-**XHDATA - suggested by István**
-![image](https://github.com/user-attachments/assets/6744a99a-3db2-4efd-b229-7f981aa970cf)
-**Dots**
-![image](https://github.com/user-attachments/assets/e9528171-ce8c-489f-8284-581f8dc56268)
-**Pixelyourlife**
-![image](https://github.com/user-attachments/assets/efc20f7f-13c8-4f87-837b-33ea76be312f)
-**RumAndBones**
-![image](https://github.com/user-attachments/assets/c931092c-cce1-40f8-928e-61030b09e018)
-**NinePin**
-![image](https://github.com/user-attachments/assets/e1bdf71a-5491-42d5-8d68-72ed4fc8d346)
+```javascript
+const SERVER_DEFAULTS = {
+    INITIAL_FONT: "Retro",            // The starting font name (must match a key in FONTS)
+    INITIAL_COLOR: "Default (White)", // The starting PS color name (must match a key in COLORS)
+    INITIAL_PS_FONT_ENABLED: false    // true = PS uses retro font by default, false = PS uses standard font
+};
+```
+
+### 2\. Font Definition (`FONTS`)
+
+Define available fonts here. The key is the display name in the dropdown.
+
+  * **url**: Path to the font file relative to the web root.
+  * **scale**: A float multiplier to adjust the font size. `1.0` is baseline. Use `> 1.0` to increase size and `< 1.0` to decrease it.
+
+<!-- end list -->
+
+```javascript
+const FONTS = {
+    "Default":   { url: "", scale: 1.0 }, // Leave URL empty to use site's original CSS font
+    "Retro":     { url: "retrofont/font.ttf", scale: 1.0 },
+    "Retro Car": { url: "retrofont/lcd2_1.ttf", scale: 0.65 }, // Example of scaling down a large font
+    // ... add more fonts here
+};
+```
+
+### 3\. Color Definition (`COLORS`)
+
+Define the color palette available for the PS text.
+
+```javascript
+const COLORS = {
+    "Default (White)": "#ffffff",
+    "Amber": "#ffa500",
+    "Red": "#ff4444",
+    // ... add more colors here
+};
+```
+
+## Technical Details
+
+### Target Elements
+
+The script specifically targets and overrides styles for the following DOM elements:
+
+  * `#data-frequency` (Main frequency display)
+  * `#data-ps` (Program Service text)
+  * `.text-big` and `.text-medium-big` (Generic large text containers)
+
+### UI Injection
+
+The script searches for an element with the ID `#imperial-units` and injects the new settings controls (PS Toggle, Font Dropdown, Color Dropdown) into its parent `.form-group`.
+
+### Local Storage Keys
+
+User preferences are saved using the following `localStorage` keys:
+
+  * `SELECTED_FONT_NAME`: The name of the chosen font.
+  * `SELECTED_PS_COLOR`: The hex code of the chosen PS color.
+  * `USE_PS_FONT`: Boolean state of the PS font toggle.
+
+## Installation
+
+1.  Ensure jQuery is loaded on your page.
+2.  Place your `.ttf` font files in a directory accessible by the webserver (default configured path is `retrofont/`).
+3.  Include this script at the end of your `<body>` or ensure it runs after the DOM is fully loaded.
