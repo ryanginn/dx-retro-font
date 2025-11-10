@@ -97,9 +97,3 @@ User preferences are saved using the following `localStorage` keys:
   * `SELECTED_FONT_NAME`: The name of the chosen font.
   * `SELECTED_PS_COLOR`: The hex code of the chosen PS color.
   * `USE_PS_FONT`: Boolean state of the PS font toggle.
-
-## Installation
-
-1.  Ensure jQuery is loaded on your page.
-2.  Place your `.ttf` font files in a directory accessible by the webserver (default configured path is `retrofont/`).
-3.  Include this script at the end of your `<body>` or ensure it runs after the DOM is fully loaded.
