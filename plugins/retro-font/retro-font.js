@@ -2,7 +2,7 @@
 // RETRO FONT - RHÍAN MAC G - 10ú SAMHAIN 2025 ==
 // ==============================================
 const SERVER_DEFAULTS = {
-    INITIAL_FONT: "Default",            // sets the default font used, leave Default if you want the default webserver font
+    INITIAL_FONT: "Retro",            // sets the default font used, leave Default if you want the default webserver font
     INITIAL_COLOR: "Default (White)",   // sets the colour of the PS text - leave Default (White) if you want it left as white
     INITIAL_PS_FONT_ENABLED: false      // toggles if PS acquires the custom font by default, leave in false state if you do not want.
 };
@@ -13,7 +13,7 @@ const SERVER_DEFAULTS = {
 const FONTS = {
     "Default":       { url: "", scale: 1.0 },
     "Retro":         { url: "retrofont/font.ttf", scale: 1.0 },
-    "Retro Car":     { url: "retrofont/lcd2_1.ttf", scale: 0.75 },
+    "Retro Car":     { url: "retrofont/lcd2_1.ttf", scale: 0.65 },
     "OpenDyslexic":  { url: "retrofont/opendyslexic.ttf", scale: 0.9 },
     "Sony XDR":      { url: "retrofont/sonyxdr.ttf", scale: 1.0 },
     "VFD":           { url: "retrofont/font12.ttf", scale: 1.0 },
@@ -75,7 +75,7 @@ function applyFontToElements(useCustomFont, scale = 1.0) {
             'font-family': titilliumOnly, 'font-size': '', 'padding': '', 'margin': '', 'letter-spacing': '', 'line-height': '', 'box-sizing': ''
         });
     } else {
-        // Apply custom font with calculated scale
+        // Apply custom font with calculated scale to generic classes
         $('.text-big').css({
             'font-family': customFontFamily,
             'font-size': (baseSizeBig * scale) + 'px',
@@ -90,8 +90,25 @@ function applyFontToElements(useCustomFont, scale = 1.0) {
         });
     }
 
+    // Apply font families based on settings
     $('#data-frequency').css('font-family', !useCustomFont ? titilliumOnly : customFontFamily);
-    $('#data-ps').css('font-family', (settings.psFontEnabled && useCustomFont) ? customFontFamily : defaultFont);
+    
+    // PS TEXT HANDLING
+    const psUsesRetro = settings.psFontEnabled && useCustomFont;
+    $('#data-ps').css('font-family', psUsesRetro ? customFontFamily : defaultFont);
+
+    // If PS is NOT using the retro font, forcibly reset its size to default (ignoring any scale applied above)
+    if (!psUsesRetro) {
+         $('#data-ps').css({
+             'font-size': '',      // Empty string resets to stylesheet default
+             'line-height': '',
+             'letter-spacing': ''
+         });
+    } else {
+        // Optional: If you find PS doesn't scale correctly when enabled, uncomment the lines below to force it.
+        // usually it inherits from .text-medium-big so it should be fine without this.
+        // $('#data-ps').css('font-size', (baseSizeMedium * scale) + 'px');
+    }
 }
 
 function loadFont(fontName) {
@@ -189,7 +206,6 @@ $(document).ready(function() {
 
     const savedColorHex = localStorage.getItem("SELECTED_PS_COLOR") !== null ? localStorage.getItem("SELECTED_PS_COLOR") : COLORS[SERVER_DEFAULTS.INITIAL_COLOR];
     
-    // *** MODIFIED LINE ***
     // Check local storage first; if nothing is saved, use the new server default
     const savedPsFontSetting = localStorage.getItem("USE_PS_FONT");
     settings.psFontEnabled = (savedPsFontSetting !== null) ? (savedPsFontSetting === "true") : SERVER_DEFAULTS.INITIAL_PS_FONT_ENABLED;
