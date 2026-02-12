@@ -1,10 +1,10 @@
 // ==============================================
-// RETRO FONT - RHÍAN MAC G - 10ú SAMHAIN 2025 ==
+// RETRO FONT - RHÍAN MAC G - 12ú FEABHRA 2025 ==
 // ==============================================
 const SERVER_DEFAULTS = {
-    INITIAL_FONT: "Retro",            // sets the default font used, leave Default if you want the default webserver font
-    INITIAL_COLOR: "Default (White)",   // sets the colour of the PS text - leave Default (White) if you want it left as white
-    INITIAL_PS_FONT_ENABLED: false      // toggles if PS acquires the custom font by default, leave in false state if you do not want.
+    INITIAL_FONT: "Retro Car",            // sets the default font used, leave Default if you want the default webserver font
+    INITIAL_COLOR: "Amber",   // sets the colour of the PS text - leave Default (White) if you want it left as white
+    INITIAL_PS_FONT_ENABLED: true      // toggles if PS acquires the custom font by default, leave in false state if you do not want.
 };
 
 // CONFIGURATION GUIDE:
@@ -42,18 +42,7 @@ var settings = {
 // CRITICAL CSS INJECTION
 // =========================================
 function injectStyles() {
-    const css = `
-        #font-selection-container .dropdown, #color-selection-container .dropdown { position: relative; }
-        #font-selection-container .options, #color-selection-container .options {
-            display: none; position: absolute; top: 100%; left: 0; right: 0;
-            z-index: 9999; max-height: 300px; overflow-y: auto;
-            background: #1a1a1a; border: 1px solid #333;
-        }
-        #font-selection-container .options.opened, #color-selection-container .options.opened { display: block; }
-        #font-selection-container .option, #color-selection-container .option { padding: 8px 12px; cursor: pointer; color:#eee; }
-        #font-selection-container .option:hover, #color-selection-container .option:hover { background: #333; }
-        #font-selection-input, #color-selection-input { cursor: pointer; }
-    `;
+    const css = `#font-selection-input, #color-selection-input { cursor: pointer; }`;
     $('<style>').prop('type', 'text/css').html(css).appendTo('head');
 }
 
@@ -165,10 +154,10 @@ function createUiElements() {
                 <i class="fa-solid fa-font m-right-10"></i>Retro Font
             </label>
             <div class="dropdown">
-                <input type="text" id="font-selection-input" class="form-control" placeholder="Select font" readonly />
-                <div id="font-selection-options" class="options">
-                    ${Object.keys(FONTS).map(name => `<div class="option" data-name="${name}">${name}</div>`).join('')}
-                </div>
+                <input type="text" id="font-selection-input" placeholder="Select font" readonly tabindex="0" />
+                <ul class="options" tabindex="0">
+                    ${Object.keys(FONTS).map(name => `<li class="option" tabindex="0" data-name="${name}">${name}</li>`).join('')}
+                </ul>
             </div>
         </div>`;
 
@@ -178,10 +167,10 @@ function createUiElements() {
                 <i class="fa-solid fa-palette m-right-10"></i>PS Color
             </label>
             <div class="dropdown">
-                <input type="text" id="color-selection-input" class="form-control" placeholder="Select color" readonly />
-                <div id="color-selection-options" class="options">
-                     ${Object.keys(COLORS).map(c => `<div class="option" data-value="${COLORS[c]}" style="border-left: 5px solid ${COLORS[c]};">${c}</div>`).join('')}
-                </div>
+                <input type="text" id="color-selection-input" placeholder="Select color" readonly tabindex="0" />
+                <ul class="options" tabindex="0">
+                    ${Object.keys(COLORS).map(c => `<li class="option" tabindex="0" data-value="${COLORS[c]}">${c}</li>`).join('')}
+                </ul>
             </div>
         </div>`;
 
@@ -221,19 +210,21 @@ $(document).ready(function() {
 
     // 4. EVENT HANDLERS
     $(document).on('click', function(e) {
-        if (!$(e.target).closest('.dropdown').length) $('.options').removeClass('opened');
+        if (!$(e.target).closest('.dropdown').length) {
+            $('#font-selection-container .dropdown, #color-selection-container .dropdown').removeClass('opened');
+        }
     });
 
     $('#font-selection-input').on('click', function(e) {
         e.stopPropagation();
-        $('#color-selection-options').removeClass('opened');
-        $('#font-selection-options').toggleClass('opened');
+        $('#color-selection-container .dropdown').removeClass('opened');
+        $('#font-selection-container .dropdown').toggleClass('opened');
     });
 
     $('#color-selection-input').on('click', function(e) {
         e.stopPropagation();
-        $('#font-selection-options').removeClass('opened');
-        $('#color-selection-options').toggleClass('opened');
+        $('#font-selection-container .dropdown').removeClass('opened');
+        $('#color-selection-container .dropdown').toggleClass('opened');
     });
 
     // Font Option Click
@@ -242,16 +233,16 @@ $(document).ready(function() {
         localStorage.setItem("SELECTED_FONT_NAME", fontName);
         $("#font-selection-input").val(fontName);
         loadFont(fontName);
-        $(this).closest('.options').removeClass('opened');
+        $(this).closest('.dropdown').removeClass('opened');
     });
 
     // Color Option Click
     $('#color-selection-container .option').on('click', function() {
         const val = $(this).data("value");
         localStorage.setItem("SELECTED_PS_COLOR", val);
-        $("#color-selection-input").val($(this).text());
+        $("#color-selection-input").val($(this).text().trim());
         applyColorToPS(val);
-        $(this).closest('.options').removeClass('opened');
+        $(this).closest('.dropdown').removeClass('opened');
     });
 
     $('#toggle-ps-font').on('change', function() {
